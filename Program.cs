@@ -1,15 +1,5 @@
 ﻿using Cbonnell.DotNetExpect;
 using System;
-using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TestStack.White;
-using TestStack.White.UIItems.WindowItems;
-using TestStack.White.UIItems.MenuItems;
-using TestStack.White.UIItems;
-using TestStack.White.UIItems.Finders;
-using TestStack.White.InputDevices;
-
-
 namespace ExpectTest
 {
     class Program
