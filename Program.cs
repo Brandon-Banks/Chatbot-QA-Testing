@@ -1,11 +1,19 @@
-﻿using Cbonnell.DotNetExpect;
+using Cbonnell.DotNetExpect;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+
 namespace ExpectTest
 {
-    class Program
+    [TestClass]
+    public class Program
     {
         static void Main(string[] args)
         {
+            List<string> output = new List<String>();
+
             using (ChildProcess childProc = new ChildProcess("C:\\WINDOWS\\system32\\cmd.exe"))
             {
                 System.Diagnostics.Debug.WriteLine(childProc.Read(">"));
@@ -18,15 +26,24 @@ namespace ExpectTest
                 childProc.WriteLine(childProc.Read(""));
 
                 childProc.WriteLine("hello");
+                output.Add("hello");
                 // Wait for the root shell prompt to appear
                 //childProc.Read("#");
 
                 // Wait until the root shell prompt appears and return the directory contents
-                string dirContents = childProc.Read("");
+                output.Add(childProc.Read(""));
 
-                // Display the directory contents to our console
-                Console.WriteLine(dirContents);
+
             }
+            using (StreamWriter sw = new StreamWriter("C:\\Users\\Brandon\\Desktop\\ExpectTest\\testResults.text"))
+            {
+                sw.WriteLine(DateTime.Now);
+                foreach (string testinfo in output)
+                {
+                    sw.WriteLine(testinfo);
+                }
+            }
+
         }
     }
 }
